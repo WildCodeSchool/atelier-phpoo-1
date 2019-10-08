@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WCS - PHP Orienté objet - Part. 1</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <!-- Bulma Version 0.7.5-->
+  <link rel="stylesheet" href="https://unpkg.com/bulma@0.7.5/css/bulma.min.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/blog.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/prism.css">
+
+
+  <link href='https://www.wildcodeschool.com/assets/favicons/apple-icon-57x57-e1d8d8663b667b33d3b19c84da2733516fabb40cd6d088aabf9539abc082e516.png' rel='apple-touch-icon' sizes='57x57'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/apple-icon-60x60-73df21cbaf187bfc511b4e6c6f21bc89bf5a57641a2d6b6f849db54a7484b5d1.png' rel='apple-touch-icon' sizes='60x60'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/apple-icon-72x72-fea0d79f13e9f879276e56964281daa768fed64b9dfb9a37349b64ad4f166914.png' rel='apple-touch-icon' sizes='72x72'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/apple-icon-76x76-d3d0eb09cf4a328fdeb0898c5337e1e35c562c3e27c6f714741b9831adceb417.png' rel='apple-touch-icon' sizes='76x76'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/apple-icon-114x114-21e45d31b51d1c6ae0bb3cda9b55c5a8265102866beca6b02c7226e8d2a0262a.png' rel='apple-touch-icon' sizes='114x114'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/apple-icon-120x120-f1be4a015d5be889e5eab34de297eef4224132d1f7242486fed0742459c058b2.png' rel='apple-touch-icon' sizes='120x120'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/apple-icon-144x144-e6c17a0c53c045d1b597038bd95bdaaf4b5881492647a6bbdf9f82cfcd0e541d.png' rel='apple-touch-icon' sizes='144x144'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/apple-icon-152x152-eacf79cb600fa230f012c84e1cb112a19dc2372105138b03ee9878d696350806.png' rel='apple-touch-icon' sizes='152x152'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/apple-icon-180x180-479ed47639f53343656c5c53c0cb3a15cded90f33bbd1f23251a95e387434420.png' rel='apple-touch-icon' sizes='180x180'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/android-icon-192x192-62efe3b81cd8fbb29316e22636a627577f79ba6673da757ba365f54547dad741.png' rel='icon' sizes='192x192' type='image/png'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/favicon-96x96-cb3c3ee8661841329cc8c9780e28b9e303a607f782849c36fc68c1916ad9ce2f.png' rel='icon' sizes='96x96' type='image/png'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/favicon-32x32-45c39d397cab9aeedbef5d706e9f4793049eefee3a26cde48da9a6f1a9ffea1c.png' rel='icon' sizes='32x32' type='image/png'>
+  <link href='https://www.wildcodeschool.com/assets/favicons/favicon-16x16-8a8808d958032f9cd11e204fa2f5b5025f4ed28a7fc0d8543358561d231c1dde.png' rel='icon' sizes='16x16' type='image/png'>
+  <meta content='/assets/favicons/ms-icon-144x144-e6c17a0c53c045d1b597038bd95bdaaf4b5881492647a6bbdf9f82cfcd0e541d.png' name='msapplication-TileImage'>
+  <meta content='#ffffff' name='msapplication-TileColor'>
+  <meta content='#F76C6C' name='theme-color'>
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicons/favicon-b55342d0842d14993468bfe1dfe3cd1e99bd16417f46fadf61e3388d4a222eab.ico" />
+
+</head>
+
+<body>
+  <!-- START NAV -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="../">
+          <img src="https://www.wildcodeschool.com/assets/logo_main-e4f3f744c8e717f1b7df3858dce55a86c63d4766d5d9a7f454250145f097c2fe.png" alt="Logo">
+        </a>
+        <span class="navbar-burger burger" data-target="navbarMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
+      <div id="navbarMenu" class="navbar-menu">
+        <!--<div class="navbar-end">
+        <a class="navbar-item is-active">
+        Home
+      </a>
+      <a class="navbar-item">
+      Examples
+    </a>
+    <a class="navbar-item">
+    Features
+  </a>
+  <a class="navbar-item">
+  Team
+</a>
+<a class="navbar-item">
+Archives
+</a>
+<a class="navbar-item">
+Help
+</a>
+<div class="navbar-item has-dropdown is-hoverable">
+<a class="navbar-link">
+Account
+</a>
+<div class="navbar-dropdown">
+<a class="navbar-item">
+Dashboard
+</a>
+<a class="navbar-item">
+Profile
+</a>
+<a class="navbar-item">
+Settings
+</a>
+<hr class="navbar-divider">
+<div class="navbar-item">
+Logout
+</div>
+</div>
+</div>
+</div>-->
+</div>
+</div>
+</nav>
+<!-- END NAV -->
+
+<section class="hero is-info is-medium is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">Atelier PHP Orienté Objet<br>Partie 1</h1>
+    </div>
+  </div>
+</section>
+
+
+<div class="container">
+  <!-- START ARTICLE FEED -->
+  <section class="articles">
+    <div class="column is-8 is-offset-2">
+      <!-- START ARTICLE -->
+      <div class="card article">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content has-text-centered">
+              <p class="title article-title">1. Utiliser des classes existantes</p>
+            </div>
+          </div>
+          <div class="content article-body">
+            <p>
+              Deux classes vous sont fournies : <a href="lib/Cat.txt" download="Cat.php"  target="_blank">Cat</a> et <a href="lib/Cat.txt" download="Collar.php" target="_blank">Collar</a>.
+            </p>
+            <p>
+              Vous devez dans un fichier <em>index.php</em> créer un petit programme qui va manipuler ces deux classes.<br>
+              <br>
+              Ce programme devra :<br/>
+            </p>
+            <ul>
+              <li>        Instancier 2 chats.</li>
+              <li>L’un avec un collier, l’autre sans collier.</li>
+              <li>Vous devrez leur paramétrer un nom, une image, une couleur, un niveau de fatigue.</li>
+              <li>Vous devrez les faire marcher jusqu’à ce qu’ils soient épuisés (niveau de fatigue à 100).</li>
+              <li>Et enfin, lorsqu’ils seront épuisés, les faire se reposer pour que leur niveau de fatigue retombe à 0.</li>
+            </ul>
+            <p><strong>Tout ceci devra être fait sans modifier les classes fournies !</strong></p>
+
+          </div>
+        </div>
+      </div>
+      <!-- END ARTICLE -->
+      <!-- START ARTICLE -->
+      <div class="card article">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-center">
+              <img src="assets/img/grumpy.jpg" class="author-image" alt="Placeholder image">
+            </div>
+            <div class="media-content has-text-centered">
+              <p class="title article-title">2. Modifier des classes existantes</p>
+
+            </div>
+          </div>
+          <div class="content article-body">
+              <ol>
+                <li>
+                  Vous devrez empêcher de pouvoir saisir une valeur de fatigue supérieure à la valeur maximale définie dans la constante FATIGUE_MAX. (Pensez à l’encapsulation)
+                </li>
+                <li>
+                  Vous devrez définir une liste de couleurs autorisées pour la classe Cat et empêcher de saisir des couleurs non autorisées.
+                </li>
+                <li>
+                  Vous devrez également créer une méthode eat(), cette dernière retirera 10 unités au niveau de fatigue de notre chat. (Pas de valeur « en dur » dans les méthodes)
+                </li>
+              </ol>
+
+            </div>
+          </div>
+        </div>
+        <!-- END ARTICLE -->
+        <!-- START PROMO BLOCK -->
+        <section class="hero is-info is-bold is-small promo-block">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">Merci de votre attention.</h1>
+            </div>
+          </div>
+        </section>
+        <!-- END PROMO BLOCK -->
+
+      </div>
+
+    </section>
+    <!-- END ARTICLE FEED -->
+  </div>
+  <script async type="text/javascript" src="assets/js/prism.js"></script>
+  <script async type="text/javascript" src="assets/js/bulma.js"></script>
+</body>
+
+</html>
