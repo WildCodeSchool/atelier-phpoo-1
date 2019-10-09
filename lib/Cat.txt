@@ -5,37 +5,90 @@ namespace Animals;
  * Created by PhpStorm.
  * User: nico
  * Date: 06/03/17
- * Time: 10:37
+ * Time: 10:29
  */
-class Collar
+class Cat
 {
-    /**
-     * La taille du collier
-     * @var Integer
-     */
-    private $size;
+    const FATIGUE_MAX = 100;
+    const FATIGUE_INCR = 10;
 
     /**
-     * La couleur du collier
+     * Le nom dui chat
+     * @var String
+     */
+    private $name;
+
+    /**
+     * Le collier du chat
+     * @var Collar
+     */
+    private $collar;
+
+    /**
+     * La couleur du chat
      * @var String
      */
     private $color;
 
     /**
-     * @return int
+     * Niveau de fatigue du chat (de 0 à 100).
+     * @var integer
      */
-    public function getSize(): int
+    private $fatigue = 0;
+
+    private $image;
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
     {
-        return $this->size;
+        return $this->image;
     }
 
     /**
-     * @param int $size
+     * @param mixed $image
+     * @return Cat
+     */
+    public function setImage($image) : Cat
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return String
+     */
+    public function getName(): String
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param String $name
+     * @return Cat
+     */
+    public function setName(String $name): Cat
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
      * @return Collar
      */
-    public function setSize(int $size): Collar
+    public function getCollar(): Collar
     {
-        $this->size = $size;
+        return $this->collar;
+    }
+
+    /**
+     * @param Collar $collar
+     * @return Cat
+     */
+    public function setCollar(Collar $collar): Cat
+    {
+        $this->collar = $collar;
         return $this;
     }
 
@@ -49,28 +102,89 @@ class Collar
 
     /**
      * @param String $color
-     * @return Collar
+     * @return Cat
      */
-    public function setColor(String $color): Collar
+    public function setColor(String $color): Cat
     {
         $this->color = $color;
         return $this;
     }
 
     /**
-     * Collar constructor.
-     * @param $size
-     * @param $color
+     * @return int
      */
-    public function __construct($size, $color)
+    public function getFatigue(): int
     {
-        $this->size = $size;
-        $this->color = $color;
+        return $this->fatigue;
     }
 
+    /**
+     * @param int $fatigue
+     * @return Cat
+     */
+    public function setFatigue(int $fatigue): Cat
+    {
+        $this->fatigue = $fatigue;
+        return $this;
+    }
+
+    /**
+     * Indique si le chat est fatigué
+     * @return bool
+     */
+    public function isTired() : bool
+    {
+        $result = false;
+        if ($this->fatigue >= self::FATIGUE_MAX) {
+            $result = true;
+        }
+        return $result;
+    }
+
+    /**
+     * Pour que note chat soit en pleine forme !
+     */
+    public function rest()
+    {
+        $this->fatigue = 0;
+    }
+
+    /**
+     * Le chat marche et surtout se dépense.
+     */
+    public function walk()
+    {
+        if ($this->getFatigue() < self::FATIGUE_MAX) {
+            $this->setFatigue($this->getFatigue() + self::FATIGUE_INCR);
+        }
+    }
+
+    /**
+     * Cat constructor.
+     * @param $color
+     * @param Collar|null $collar
+     */
+    public function __construct($name, $color, Collar $collar = null)
+    {
+        $this->name = $name;
+        $this->color = $color;
+        if ($collar !== null) {
+            $this->collar = $collar;
+        }
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        $str = 'Mon collier "'.get_class($this).'" est : '.$this->getColor().' de taille '.$this->getSize();
+        $str = '<img src="'.$this->getImage().'" height="100px" /> : Je suis un "'.get_class($this).'", je m\'appelle <strong>'.$this->getName().'</strong>, suis de couleur '.$this->getColor().' et mon niveau de fatigue est à '.$this->getFatigue();
+        if ($this->collar !== null) {
+            $str .= '<br />'.$this->collar;
+        } else {
+            $str .= '<br />Je n\'ai pas de collier.';
+        }
+        $str .= '<br />';
         return $str;
     }
 }
