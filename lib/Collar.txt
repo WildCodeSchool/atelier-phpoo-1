@@ -17,7 +17,7 @@ class Collar
 
     /**
      * La couleur du collier
-     * @var String
+     * @var string
      */
     private $color;
 
@@ -40,18 +40,18 @@ class Collar
     }
 
     /**
-     * @return String
+     * @return string
      */
-    public function getColor(): String
+    public function getColor(): string
     {
         return $this->color;
     }
 
     /**
-     * @param String $color
+     * @param string $color
      * @return Collar
      */
-    public function setColor(String $color): Collar
+    public function setColor(string $color): Collar
     {
         $this->color = $color;
         return $this;
@@ -68,7 +68,7 @@ class Collar
         $this->color = $color;
     }
 
-    public function __toString()
+    public function __tostring()
     {
         $str = 'Mon collier "'.get_class($this).'" est : '.$this->getColor().' de taille '.$this->getSize();
         return $str;
