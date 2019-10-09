@@ -9,11 +9,11 @@ namespace Animals;
  */
 class Cat
 {
-    const FATIGUE_MAX = 100;
-    const FATIGUE_INCR = 10;
+    const TIREDNESS_MAX = 100;
+    const TIREDNESS_INCR = 10;
 
     /**
-     * Le nom dui chat
+     * Le nom du chat
      * @var String
      */
     private $name;
@@ -31,44 +31,59 @@ class Cat
     private $color;
 
     /**
-     * Niveau de fatigue du chat (de 0 à 100).
+     * Niveau de tiredness du chat (de 0 à 100).
      * @var integer
      */
-    private $fatigue = 0;
+    private $tiredness = 0;
 
     private $image;
 
     /**
-     * @return mixed
+     * Cat constructor.
+     * @param string $name
+     * @param string $color
+     * @param Collar|null $collar
      */
-    public function getImage()
+    public function __construct(string $name, string $color, Collar $collar = null)
+    {
+        $this->name = $name;
+        $this->color = $color;
+        if ($collar !== null) {
+            $this->collar = $collar;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage() :string
     {
         return $this->image;
     }
 
     /**
-     * @param mixed $image
+     * @param string $image
      * @return Cat
      */
-    public function setImage($image) : Cat
+    public function setImage(string $image): Cat
     {
         $this->image = $image;
         return $this;
     }
 
     /**
-     * @return String
+     * @return string
      */
-    public function getName(): String
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param String $name
+     * @param string $name
      * @return Cat
      */
-    public function setName(String $name): Cat
+    public function setName(string $name): Cat
     {
         $this->name = $name;
         return $this;
@@ -93,18 +108,18 @@ class Cat
     }
 
     /**
-     * @return String
+     * @return string
      */
-    public function getColor(): String
+    public function getColor(): string
     {
         return $this->color;
     }
 
     /**
-     * @param String $color
+     * @param string $color
      * @return Cat
      */
-    public function setColor(String $color): Cat
+    public function setColor(string $color): Cat
     {
         $this->color = $color;
         return $this;
@@ -113,18 +128,18 @@ class Cat
     /**
      * @return int
      */
-    public function getFatigue(): int
+    public function getTiredness(): int
     {
-        return $this->fatigue;
+        return $this->tiredness;
     }
 
     /**
-     * @param int $fatigue
+     * @param int $tiredness
      * @return Cat
      */
-    public function setFatigue(int $fatigue): Cat
+    public function setTiredness(int $tiredness): Cat
     {
-        $this->fatigue = $fatigue;
+        $this->tiredness = $tiredness;
         return $this;
     }
 
@@ -135,7 +150,7 @@ class Cat
     public function isTired() : bool
     {
         $result = false;
-        if ($this->fatigue >= self::FATIGUE_MAX) {
+        if ($this->tiredness >= self::TIREDNESS_MAX) {
             $result = true;
         }
         return $result;
@@ -146,7 +161,7 @@ class Cat
      */
     public function rest()
     {
-        $this->fatigue = 0;
+        $this->tiredness = 0;
     }
 
     /**
@@ -154,22 +169,8 @@ class Cat
      */
     public function walk()
     {
-        if ($this->getFatigue() < self::FATIGUE_MAX) {
-            $this->setFatigue($this->getFatigue() + self::FATIGUE_INCR);
-        }
-    }
-
-    /**
-     * Cat constructor.
-     * @param $color
-     * @param Collar|null $collar
-     */
-    public function __construct($name, $color, Collar $collar = null)
-    {
-        $this->name = $name;
-        $this->color = $color;
-        if ($collar !== null) {
-            $this->collar = $collar;
+        if ($this->getTiredness() < self::TIREDNESS_MAX) {
+            $this->setTiredness($this->getTiredness() + self::TIREDNESS_INCR);
         }
     }
 
@@ -178,7 +179,7 @@ class Cat
      */
     public function __toString()
     {
-        $str = '<img src="'.$this->getImage().'" height="100px" /> : Je suis un "'.get_class($this).'", je m\'appelle <strong>'.$this->getName().'</strong>, suis de couleur '.$this->getColor().' et mon niveau de fatigue est à '.$this->getFatigue();
+        $str = '<img src="'.$this->getImage().'" height="100px" /> : Je suis un "'.get_class($this).'", je m\'appelle <strong>'.$this->getName().'</strong>, suis de couleur '.$this->getColor().' et mon niveau de tiredness est à '.$this->getTiredness();
         if ($this->collar !== null) {
             $str .= '<br />'.$this->collar;
         } else {
